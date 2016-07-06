@@ -1,4 +1,4 @@
-package bank;
+package bank2;
 import javax.swing.JOptionPane;
 
 /**
@@ -18,7 +18,7 @@ public class BankController {
 
 		while (true) {
 			switch (JOptionPane.showInputDialog("========개인인터넷뱅킹========\n" + "1.개설 2.입금 3.조회 4.출금, 5.통장내역"
-					+ "\n========은행창구========\n" + " 11.개설(은행)  12.조회(전체) 13.조회(계좌번호) 14.조회(이름) 15.조회(전체통장수) "
+					+ "\n=======은행창구========\n" + " 11.개설(은행)  12.조회(전체) 13.조회(계좌번호) 14.조회(이름) 15.조회(전체통장수) "
 					+ "\n 16.수정(비밀번호) 17.해지 0.종료")) {
 			case "1":
 				spec = JOptionPane.showInputDialog("이름,ID,PW");

@@ -1,62 +1,73 @@
-/**
- * 
- */
 package grade;
 
-/**
- * @date :2016. 6. 21.
- * @author :오승준
- * @file :GradeBean.java
- * @story :
- */
 public class GradeBean {
-	private int kor, eng, math, total, rank;
-	private String name;
-	private double evg;
-
-	public GradeBean(String name, int kor, int math, int eng) {
-	this.name = name;
-	this.kor = kor;
-	this.math = math;
-	this.eng = eng;
+	private String id,grade,seq,examDate, subject;
+	private int java,sql,html,javascript, score;
 	
+	public String getSubject() {
+		return subject;
 	}
-
-	public void setKor(int kor) {
-		this.kor = kor;
+	public void setSubject(String subject) {
+		this.subject = subject;
 	}
-
-	public void setEng(int eng) {
-		this.eng = eng;
+	public int getScore() {
+		return score;
 	}
-
-	public void setMath(int math) {
-		this.math = math;
+	public void setScore(int score) {
+		this.score = score;
 	}
-
-	public void setName(String name) {
-		this.name = name;
+	public String getExamDate() {
+		return examDate;
 	}
-
-	public int getKor() {
-		return kor;
+	public void setExamDate(String examDate) {
+		this.examDate = examDate;
 	}
-
-	public int getEng() {
-		return eng;
+	public String getSeq() {
+		return seq;
 	}
-
-	public int getMath() {
-		return math;
+	public void setSeq(String seq) {
+		this.seq = seq;
 	}
-
-	public String getName() {
-		return name;
+	public int getJava() {
+		return java;
 	}
-
+	public void setJava(int java) {
+		this.java = java;
+	}
+	public int getSql() {
+		return sql;
+	}
+	public void setSql(int sql) {
+		this.sql = sql;
+	}
+	public int getHtml() {
+		return html;
+	}
+	public void setHtml(int html) {
+		this.html = html;
+	}
+	public int getJavascript() {
+		return javascript;
+	}
+	public void setJavascript(int javascript) {
+		this.javascript = javascript;
+	}
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
+	public String getGrade() {
+		return grade;
+	}
+	public void setGrade(String grade) {
+		this.grade = grade;
+	}
 	@Override
 	public String toString() {
-		return "GradeBean [kor=" + kor + ", eng=" + eng + ", math=" + math + ", total=" + total + ", rank=" + rank
-				+ ", name=" + name + "]";
+		return "성적표 [No." + seq + ",아이디 :" + id + ", 학점 :" + grade + "\n"
+				+ "  자바 : " + java + ", SQL : " + sql
+				+ ", HTML5 : " + html + ", 자바스크립트 : " + javascript + "]";
 	}
 }

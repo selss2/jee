@@ -1,36 +1,70 @@
-/**
- * 
- */
 package grade;
+
+import java.util.List;
 
 import javax.swing.JOptionPane;
 
 /**
- * @date :2016. 6. 21.
- * @author :오승준
- * @file :GradeController.java
+ * @date :2016. 6. 8.
+ * @author :pakjkwan@gmail.com
+ * @file :Avg.java
  * @story :
  */
 public class GradeController {
+	/**
+	 * 클라이언트에서 프로그램 개발 요청이 왔습니다. 
+	 * 이름과 국,영,수 세과목점수를 입력받아서() [홍길동 : 총점 ***점,
+	 * 평균***점,학점 : F] 을 출력하는 프로그램을 만들어 주세요. 
+	 * 단) 평균은 소수점이하는 절삭합니다 평균점수가 90점 이상 A
+	 * 80점 이상이면 B 70점 이상이면 C 60점 이상이면 D 
+	 * 50점 이상이면 E 50점 미만이면 F 학점입니다라고 출력되게 해주세요
+	 * [단]switch-case 문으로 해결하세요
+	 */
 	public static void main(String[] args) {
-		GradeService service = new GradeServiceImpl();
-
+		GradeService service = GradeServiceImpl.getInstance();
+		
 		while (true) {
-			switch (JOptionPane.showInputDialog("1.입력 2.확인")) {
-			case "1":		
-				String spec = JOptionPane.showInputDialog("이름, 국,영,수 점수");
-				String []specArr = spec.split(",");
-				service.reg(specArr[0],Integer.parseInt(specArr[1]),Integer.parseInt(specArr[2]),Integer.parseInt(specArr[3]));
-				
+			
+			switch (JOptionPane.showInputDialog(""
+					+ "1추가 2수정 3삭제 4전체조회 5학점을 포함한 시험내역 조회(SEQ) "
+					+ "6시퀀스조회(ID) 7응시생수(시험일자별) 0종료"
+					+ "")) {
+			case "1":
+				service.score(JOptionPane.showInputDialog("id,date,java,sql,html,js").split(","));
 				break;
 			case "2":
-				JOptionPane.showMessageDialog(null, "총점"+service.total()+"평균"+service.evg()+"학점"+service.rank());
+				GradeBean bean = new GradeBean();
+				 String input=JOptionPane.showInputDialog("과목,점수,seq");
+				 String[] inputArr = input.split(",");
+				 bean.setSubject(inputArr[0]);
+				 bean.setScore(Integer.parseInt(inputArr[1]));
+				 bean.setSeq(inputArr[2]);
+				 service.update(bean);
+				 
 				break;
+			case "3":
+				String del = JOptionPane.showInputDialog("시퀀스를 입력하시오.");
+				service.delete(del);
+				break;
+			case "4":
+				GradeUI ui = new GradeUI();
+				break;
+			case "5":
+				String seq = JOptionPane.showInputDialog("조회하려는 SEQ");
+				JOptionPane.showMessageDialog(null, service.findBySeq(seq));
+				break;
+			case "6":
+				String sid = JOptionPane.showInputDialog("조회하려는 ID");
+				JOptionPane.showMessageDialog(null, service.findById(sid));
+				break;
+			case "7":
+			String examDate = JOptionPane.showInputDialog("조회하려는 시험일자(예:2016-05)");
+				JOptionPane.showMessageDialog(null, service.count(examDate)+"명");
+				break;
+			case "0":return;
 			default:
-				JOptionPane.showConfirmDialog(null, "정말로 종료하시겠습니까?");
-				return;
+				break;
 			}
 		}
-
 	}
 }

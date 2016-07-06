@@ -1,39 +1,41 @@
 /**
  * 
  */
-package bank;
-
-import javax.swing.JOptionPane;
+package bank2;
 
 /**
- * @date :2016. 6. 20.
+ * @date   :2016. 6. 20.
  * @author :오승준
- * @file :AccountService.java
- * @story :
+ * @file   :AccountServiceImpl.java
+ * @story  : 
  */
 
-public class AccountService2 {
-	// AccountBean에서 생성자를 오버로딩 했음
-	// 1.개설 2.입금 3.조회 4.출금, 5.통장내역 6.해지
-	AccountBean account = new AccountBean();
-
-	// 1. 개설
+public class AccountServiceImpl implements AccountService {
+	// 1개설 2입금 3조회 4출금 5통장내역 6해지
+	AccountBean account;
+	
+	@Override
+	// 1개설
 	public void openAccount(String name, String id, String pw) {
-		account = new AccountBean(name, id, pw);
+		account = new AccountBean(name,id,pw);
 	}
 
-	// 2. 입금
+	@Override
+	// 2입금
 	public void deposit(int inputMoney) {
-		int money = account.getMoney();
-		money += inputMoney;
+		int money = account.getMoney() ;
+		money+=inputMoney;
 		account.setMoney(money);
 	}
 
-	// 3. 조회
+	@Override
+	// 3조회
 	public void findAccount() {
+		
 	}
 
-	// 4. 출금
+	@Override
+	// 4출금
 	public String withdraw(int output) {
 		String result = "잔액부족";
 		int money = account.getMoney();
@@ -45,14 +47,17 @@ public class AccountService2 {
 		return result;
 	}
 
-	// 5. 통장내역
+	@Override
+	// 5통장내역
 	public String showAccount() {
 		return account.toString();
 	}
 
-	// 6. 해지
-	public String deletAccount() {
+	@Override
+	// 6해지
+	public String deleteAccount() {
 		account = null;
 		return "해지";
 	}
+
 }
