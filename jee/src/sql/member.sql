@@ -7,12 +7,14 @@ create table member(
 	ssn varchar2(10)
 );
 -- CREATE
-insert into member(id,pw,name,reg_date,ssn) 
+insert into member(id,pw,name,reg,ssn) 
 values('lee','1','이순신','2016-07-01','800101-1');
-insert into member(id,pw,name,reg_date,ssn) 
-values('hong2','1','홍길동','2015-07-01','100701-1');
-insert into member(id,pw,name,reg_date,ssn) 
+insert into member(id,pw,name,reg,ssn) 
+values('hong','1','홍길동','2015-07-01','100701-1');
+insert into member(id,pw,name,reg,ssn) 
 values('you','1','유관순','2014-07-01','010701-4');
+insert into member(id,pw,name,reg,ssn) 
+values('kimhyunsoo','1','김현수','2014-07-08','900325-1');
 -- READ ()
 select * from member; -- list
 select * from member where id = 'hong';-- findByPK

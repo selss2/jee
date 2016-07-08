@@ -1,11 +1,14 @@
 package member;
-
 import java.util.List;
+
+import bank.AccountServiceImpl;
 
 public class MemberServiceImpl implements MemberService{
 	
 	MemberDAO dao = MemberDAO.getInstance();
+	AccountServiceImpl accService = AccountServiceImpl.getInstance();
 	
+	MemberBean session;
 	private static MemberServiceImpl instance = new MemberServiceImpl();
 		public static MemberServiceImpl getInstance() {
 		return instance;
@@ -77,14 +80,17 @@ public class MemberServiceImpl implements MemberService{
 		return dao.list();
 	}
 
+	@Override
+		public String login(MemberBean member) {
+			// 2.로그인
+		String result = "";
+				if (dao.login(member)) {
+					result = "로그인성공";
+					session = findById(member.getId());
+					accService.map();
+				}else{
+					result = "로그인실패";
+				}
+			return result;
+	}
 }
-/*
-String sqlCreate = "create table member("
-			+ "id varchar2(20) primary key,"
-			+ "pw varchar2(20),"
-			+ "name varchar2(20),"
-			+ "reg_date varchar2(20),"
-			+ "ssn varchar(10)"
-			+ ")";
-	String sqlDrop = "drop table member";
-*/

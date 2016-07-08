@@ -45,7 +45,6 @@ public class GradeServiceImpl implements GradeService {
 
 	@Override
 	public List<GradeBean> findById(String id) {
-		
 		return dao.findById(id);
 	}
 

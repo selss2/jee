@@ -1,67 +1,60 @@
 package bank;
+import java.util.Map;
 
 import javax.swing.JOptionPane;
 
-import bank2.AccountBean;
-import grade.GradeBean;
-
+import member.MemberBean;
+import member.MemberService;
+import member.MemberServiceImpl;
 /**
- * @date :2016. 6. 15.
- * @author :오승준
- * @file :BankController.java
- * @story :
- */
+ * @date   :2016. 6. 15. 
+ * @author :pakjkwan@gmail.com
+ * @file   :BankController.java
+ * @story  :
+*/
 public class AccountController {
 	public static void main(String[] args) {
+		AccountService service = AccountServiceImpl.getInstance();
+		MemberService mService = MemberServiceImpl.getInstance();
 		
-		AccountServiceImpl service = AccountServiceImpl. getInstance();
-		
-		// 1개설 2입금 3조회 4출금 5통장내역 6해지
 		while (true) {
-			switch (JOptionPane.showInputDialog("1개설 2입금 3조회 4출금 5통장내역 6해지")) {
+			switch (JOptionPane.showInputDialog(""
+					+ "1개설 2입금 3출금 4수정 5해지"
+					+ "6전체조회 7조회(계좌) 8조회(이름) 9통장수 10로그인 0종료")) {
 			case "1":
-				String input = JOptionPane.showInputDialog("이름,ID,PW");
-				AccountBean bean = new AccountBean();
-				String[] inputArr = input.split(",");
-				bean.setAccountNo();
-				bean.setName(inputArr[0]);
-				bean.setId(inputArr[1]);
-				bean.setPw(inputArr[2]);
-				service.openAccount(bean);
-				
-//				GradeBean bean = new GradeBean();
-//				 String input=JOptionPane.showInputDialog("과목,점수,seq");
-//				 String[] inputArr = input.split(",");
-//				 bean.setSubject(inputArr[0]);
-//				 bean.setScore(Integer.parseInt(inputArr[1]));
-//				 bean.setSeq(inputArr[2]);
-//				 service.update(bean);
-				 
-				
-				
+				String id = JOptionPane.showInputDialog("ID");
+				String msg = service.openAccount(id);
+				JOptionPane.showMessageDialog(null, msg);
 				break;
 			case "2":
-				String inputMoney = JOptionPane.showInputDialog("입금액 ? ");
-				// account.setMoney(Integer.parseInt(inputMoney));
-				service.deposit(Integer.parseInt(inputMoney));
+				String depositInfo = JOptionPane.showInputDialog("계좌,입금액");
+				service.deposit(depositInfo);
 				break;
 			case "3":
-				// JOptionPane.showMessageDialog(null, service.findAccount());
+				String withdrawInfo = JOptionPane.showInputDialog("계좌,출금액");
+				service.withdraw(withdrawInfo);
 				break;
 			case "4":
-				String output = JOptionPane.showInputDialog("출금액 ? ");
-				service.withdraw(Integer.parseInt(output));
-				JOptionPane.showMessageDialog(null, service.withdraw(Integer.parseInt(output)));
+				MemberBean stu2 = new MemberBean();
+				String input2 = JOptionPane.showInputDialog("ID,PW");
+				String[]inputArr2 = input2.split(",");
+				stu2.setId(inputArr2[0]);
+				stu2.setPw(inputArr2[1]);
+				String result2 = mService.update(stu2);
+				JOptionPane.showMessageDialog(null, result2);
 				break;
-			case "5":
-				JOptionPane.showMessageDialog(null, service.showAccount());
-				break;
+			case "5":break;
 			case "6":
-				JOptionPane.showMessageDialog(null, service.deleteAccount());
+				BankUI ui = new BankUI();
 				break;
-			case "0":
-				JOptionPane.showConfirmDialog(null, "종료하시겠습니까?");
-				return;
+			case "7":break;
+			case "8":break;
+			case "9":break;
+			case "10":
+				break;
+			case "0":return;
+			default:
+				break;
 			}
 		}
 	}

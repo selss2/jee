@@ -1,6 +1,13 @@
 package bank;
+
 import global.Constants;
 
+/**
+ * @date   :2016. 6. 16. 
+ * @author :pakjkwan@gmail.com
+ * @file   :Account.java
+ * @story  :
+*/
 public class AccountBean {
 	private int accountNo; // 인스턴스 변수는 초기화를 하지 않는다
 	private String name;
@@ -40,7 +47,7 @@ public class AccountBean {
 	public void setAccountNo() {
 		this.accountNo = (int) (Math.random() * 999999)+100000; 
 	}
-	public void setAcountNo(int accountNo){
+	public void setAccountNo(int accountNo){
 		this.accountNo = accountNo;
 	}
 	public void setName(String name) {
