@@ -4,11 +4,19 @@ import java.sql.Date;
 import java.text.SimpleDateFormat;
 
 public class MemberBean {
-	private String id,pw,name,regDate,gender,ssn; 
+	private String id,pw,name,regDate,gender,ssn, profileImg; 
 	private int birth;
-	
+	// id, birth,name,regDate,gender 
 	public MemberBean() {}
 	
+	public String getProfileImg() {
+		return profileImg;
+	}
+
+	public void setProfileImg(String profileImg) {
+		this.profileImg = profileImg;
+	}
+
 	public MemberBean(String id,String pw,String name,String ssn) {
 		this.id = id;
 		this.pw = pw;
@@ -47,6 +55,8 @@ public class MemberBean {
 			System.out.println("잘못된값이 입력됨");
 		}
 	}
+	
+	
 	public String getId() {
 		return id;
 	}
