@@ -1,9 +1,9 @@
+<%@page import="member.MemberBean"%>
+<%@page import="member.MemberServiceImpl"%>
+<%@page import="member.MemberService"%>
 <%@page import="org.apache.jasper.tagplugins.jstl.core.If"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%
-	request.setCharacterEncoding("utf-8");
-%>
 <%
 	String ctx = application.getContextPath();
 %>
@@ -12,10 +12,9 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<title>Document</title>
+<title>회원가입 result</title>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>회원가입</title>
 <link rel="stylesheet" href=" <%=ctx%>/css/member.css" />
 <style>
 h1 {
@@ -47,6 +46,29 @@ div.joinDiv {
 </head>
 <body>
 	<div class="box">
+
+<%
+MemberService service = MemberServiceImpl.getInstance();
+MemberBean mem = new MemberBean();
+
+String id = request.getParameter("id");
+String pw = request.getParameter("pw");
+String ssn = request.getParameter("ssn");
+String name = request.getParameter("name");
+mem.setId(id);
+mem.setPw(pw);
+mem.setName(name);
+mem.setSsn(ssn);
+mem.setRegDate();
+name = service.regist(mem);
+application.log("(1)id :"+id+" (2)pw : "+pw+" (3)이름 : "+name);
+if(id==""){
+%>
+<h2> 아이디 중복!!</h2>
+<a href="<%=ctx%>/member/service/regist.jsp">회원가입 다시하기</a>
+<%
+}else{
+%>
 		<span class="meta"> 이름 </span>
 		<%=request.getParameter("name")%><br /> <span class="meta">
 			ID </span>
@@ -68,14 +90,13 @@ div.joinDiv {
 		<%
 			}
 			}
-		%>
+		%><br/>
 		회원가입을 축하드립니다.
-		<%=request.getParameter("name")%>
-		님♥<br /> <a href=" <%=ctx%>/member/member_controller.jsp"><img
-			src=" <%=ctx%>/img/ThumbnailAction.jpg" alt="" width="10%"
-			height="10%"></a> <a href=" <%=ctx%>/index.jsp"><img
-			src=" <%=ctx%>/img/home.png" alt="" width="10%" height="10%"></a>
-
+		<%=request.getParameter("name")%>님♥<br />
+	<%} %>
+		
+<a href=" <%=ctx%>/member/member_controller.jsp"><img src=" <%=ctx%>/img/ThumbnailAction.jpg" alt="" width="10%" height="10%"/></a> 
+<a href=" <%= ctx %>/index.jsp"><img src="<%=ctx%>/img/home.png" alt="" width="10%" height="10%"/></a>
 	</div>
 </body>
 </html>

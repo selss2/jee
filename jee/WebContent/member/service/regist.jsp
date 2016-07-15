@@ -25,7 +25,7 @@ div.joinDiv{border: 1px dotted black; width: 500px; margin: 0 auto;}
 	<span class="meta"> 이름 : </span><input type="text" name="name"><br/>
 	<span class="meta"> ID : </span> <input type="text" name="id"><br/>
 	<span class="meta"> PW : </span> <input type="text" name="pw"><br/>
-	<span class="meta"> SSN : </span> <input type="text" name="ssn"> - <input type="text" name="ssn2" size="1"><br/>
+	<span class="meta"> SSN : </span> <input type="text" name="ssn"><br/>
 	
 	<span class="meta"> 전공 </span>
 	<input type="radio" name="major" value="computer" checked/> 컴퓨터공학

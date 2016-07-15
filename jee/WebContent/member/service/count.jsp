@@ -10,7 +10,6 @@
 	<meta charset="UTF-8" />
 	<title>회원수</title>
 <link rel="stylesheet" href=" <%= ctx %>/css/member.css" />
-
 </head>
 <body>
 <div class = "box">

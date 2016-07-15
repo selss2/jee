@@ -16,9 +16,14 @@ package member;
 		}
 
 		
-		private MemberServiceImpl() {
-			// TODO Auto-generated constructor stub
+		public MemberBean getSession() {
+			return session;
 		}
+
+
+		private MemberServiceImpl() {
+		}
+		
 		
 		@Override
 		public String regist(MemberBean mem) {
@@ -32,10 +37,10 @@ package member;
 			}
 			return msg;
 		}
-
+		
 		@Override
 		public String update(MemberBean mem) {
-			String result = ""; 
+			String result = "";
 			if (dao.update(mem) == 1) {
 				result = "수정성공";
 			} else {
@@ -58,7 +63,6 @@ package member;
 
 		@Override
 		public int count() {
-			// TODO Auto-generated method stub
 			return dao.count();
 		}
 
@@ -102,4 +106,16 @@ package member;
 			
 			return result;
 		}
+
+		@Override
+		public String delete(MemberBean mem) {
+			return null;
+		}
+
+		@Override
+		public MemberBean show() {
+			return session;
+		}
+
 	}
+

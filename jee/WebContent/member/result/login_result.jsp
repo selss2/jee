@@ -8,14 +8,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>로그인</title>
+<title>로그인 result</title>
 <link rel="stylesheet" href="<%=ctx%>/css/member.css" />
 </head>
 <body>
 <div class="box">
 <%
 	MemberService service = MemberServiceImpl.getInstance();
-	MemberBean member = new MemberBean();
+	MemberBean mem = new MemberBean();
 	
 	String id = request.getParameter("id");
 	String pw = request.getParameter("pw");
@@ -28,9 +28,9 @@
 	
 		<%
 	}else{
-		member.setId(id);
-		member.setPw(pw);
-		String name = service.login(member);
+		mem.setId(id);
+		mem.setPw(pw);
+		String name = service.login(mem);
 		application.log("DB다녀온 이름:"+name);
 		if(name==""){
 			%>

@@ -30,6 +30,7 @@ public class MemberController {
 				stu4.setPw(inputArr4[1]);
 				String result4 = service.login(stu4);
 				JOptionPane.showMessageDialog(null, result4);
+			case "3":
 				break;
 			case "4":
 				MemberBean stu2 = new MemberBean();
@@ -51,7 +52,8 @@ public class MemberController {
 				String findID = JOptionPane.showInputDialog("조회할 ID");
 				JOptionPane.showMessageDialog(null, service.findById(findID));
 				break;
-			case "14":break;
+			case "14":
+				break;
 			case "15":
 				int count = service.count();
 				JOptionPane.showMessageDialog(null, count);
