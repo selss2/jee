@@ -1,41 +1,51 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+        <%
+    String ctx = application.getContextPath();
+    %>
+    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>회원가입</title>
-<link rel="stylesheet" href="../../css/member.css" />
-<style type="text/css">
- div{border: 1px solid black;margin: 7px auto;
- width: 400px;text-align: center;}
- div.joinDiv{border: 1px dotted gray; width: 80%; margin:8px;}
+<link rel="stylesheet" href=" <%= ctx %>/css/member.css" />
+<style>
+h1 {color: blue;}
+h5 {border: 1px solid black; width: 800px; margin: 0 auto;}
+p {color : red;}
+span.meta{width: 200px; background-color: yellow; float: left;}
+div.joinDiv{border: 1px dotted black; width: 500px; margin: 0 auto;}
 </style>
 </head>
 <body>
 <div class = "box">
 
-<form action="" method="get">
-	이름 : <input type = "text" name="name"/><br/>
-	ID : <input type = "text" name="id"/><br/>
-	PW : <input type = "text" name="pw"/><br/>
-	SSN : <input type = "text" name="ssn" size="6">
-	- <input type = "text" size="1"/> <br/>"WebContent/member2/service/delete.html"
+	<form action=" <%= ctx %>/member/result/regist_result.jsp" method="post">
+	<span class="meta"> 이름 : </span><input type="text" name="name"><br/>
+	<span class="meta"> ID : </span> <input type="text" name="id"><br/>
+	<span class="meta"> PW : </span> <input type="text" name="pw"><br/>
+	<span class="meta"> SSN : </span> <input type="text" name="ssn"> - <input type="text" name="ssn2" size="1"><br/>
 	
-	통신사 :
-	<input type="checkbox" name="SKT" value="skt"/>SKT
-	<input type="checkbox" name="KT" value="kt"/>KT
-	<input type="checkbox" name="LGU" value="lgu"/>LGU+ <br/>
+	<span class="meta"> 전공 </span>
+	<input type="radio" name="major" value="computer" checked/> 컴퓨터공학
+	<input type="radio" name="major" value="mgmt"/> 경영학부
+	<input type="radio" name="major" value="math"/> 수학부
+	<input type="radio" name="major" value="eng"/> 영문학부
+
+	<span class="meta"> 수강과목 </span>
+	<input type="checkbox" name="subject" value="java"/>Java
+	<input type="checkbox" name="subject" value="sql"/>SQL
+	<input type="checkbox" name="subject" value="cpp"/>C++
+	<input type="checkbox" name="subject" value="python"/>파이썬
+	<input type="checkbox" name="subject" value="delphi"/>델파이<br/>
 	
-	성별 :
-	<input type="checkbox" name="gender" value="male"/> 남자
-	<input type="checkbox" name="gender" value="female"/> 여자 <br/>
 	<input type="submit" value="회원가입"/>
 	<input type="reset" value="취소"/><br/>
-	
-	 <a href="../memberController.jsp"><img src="../../img/ThumbnailAction.jpg" alt="" width="10%" height="10%"></a>
-	 <a href="../../index.jsp"><img src="../../img/home.png" alt="" width="10%" height="10%"></a>
 	</form>
+	
+	 <a href=" <%= ctx %>/member/member_controller.jsp"><img src=" <%= ctx %>/img/ThumbnailAction.jpg" alt="" width="10%" height="10%"></a>
+	 <a href=" <%= ctx %>/index.jsp"><img src=" <%= ctx %>/img/home.png" alt="" width="10%" height="10%"></a>
 	</div>
 </body>
 </html>

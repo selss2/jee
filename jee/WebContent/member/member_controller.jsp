@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+        <%
+    String ctx = application.getContextPath();
+    %>
+    
 <!doctype html>
 <html lang="en">
 <head>
@@ -25,7 +29,7 @@ div.memberClass{font-size: 20px;}
 			<li><a href="service/count.jsp">회원수</a></li>
 		</ol>
 		</div>
-		<a href="../index.jsp"><img src="../../home.png" alt="" width="10%" height="10%"></a>
+		<a href=" <%= ctx %>/index.jsp"><img src=" <%= ctx %>/img/home.png" alt="" width="10%" height="10%"></a>
 	</div>
 	<div id="box2" class="memberClass">
 	

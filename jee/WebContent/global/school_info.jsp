@@ -8,15 +8,16 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8" />
-<title>수정</title>
+<title>학교소개</title>
+<div class="box" style="margin: 0 auto;"></div>
 <link rel="stylesheet" href=" <%= ctx %>/css/member.css" />
-
 </head>
+
 <body>
-<div class = "box">
-	수정 <br>
-	<a href=" <%= ctx %>/member/member_controller.jsp"><img src=" <%= ctx %>/img/ThumbnailAction.jpg" alt="" width="10%" height="10%"></a>
-	<a href=" <%= ctx %>/index.jsp"><img src=" <%= ctx %>/img/home.png" alt="" width="10%" height="10%"></a>
+	<div class="box">
+		<h1>학교 소개</h1>
+		<iframe width="560" height="315"
+			src="https://www.youtube.com/embed/v1JX4UaLjhA?autoplay=1"></iframe>
 	</div>
 </body>
 </html>

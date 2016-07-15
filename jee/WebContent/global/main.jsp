@@ -1,3 +1,9 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+        <%
+    String ctx = application.getContextPath();
+    %>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -59,10 +65,10 @@
 
 	<div id="nav">
 		<ul>
-			<li class="active"><a href="member/member_controller.jsp">회원관리</a></li>
+			<li class="active"><a href=" <%= ctx %>/member/member_controller.jsp">회원관리</a></li>
 			<li><a href="#">성적관리</a></li>
 			<li><a href="#">계좌관리</a></li>
-			<li><a href="#">학교소개</a></li>
+			<li><a href="school_info.jsp">학교소개</a></li>
 		</ul>
 	</div>
 
@@ -75,7 +81,7 @@
 	</div>
 	
 	<div id="footer">
-		Copyright © W3Schools.com
+		Copyright © By 오승준
 	</div>
 </body>
 </html>

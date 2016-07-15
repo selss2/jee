@@ -1,12 +1,7 @@
 package member;
+
 import javax.swing.JOptionPane;
 
-/**
- * @date   :2016. 6. 16. 
- * @author :pakjkwan@gmail.com
- * @file   :SchoolController.java
- * @story  :
-*/
 public class MemberController {
 	public static void main(String[] args) { // String[] params
 		MemberService service = MemberServiceImpl.getInstance();
@@ -28,6 +23,13 @@ public class MemberController {
 				JOptionPane.showMessageDialog(null, result);
 				break;
 			case "2":
+				MemberBean stu4 = new MemberBean();
+				String input4 = JOptionPane.showInputDialog("ID,PW");
+				String[]inputArr4 = input4.split(",");
+				stu4.setId(inputArr4[0]);
+				stu4.setPw(inputArr4[1]);
+				String result4 = service.login(stu4);
+				JOptionPane.showMessageDialog(null, result4);
 				break;
 			case "4":
 				MemberBean stu2 = new MemberBean();
