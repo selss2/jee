@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +17,7 @@ public class MemberDAO {
 	PreparedStatement pstmt;
 	ResultSet rs; // executeQuery() 에서만 리턴받는 객체
 	private static MemberDAO instance = new MemberDAO();
-	MemberBean session;
+	
 	public static MemberDAO getInstance() {
 		return instance;
 	}
@@ -29,44 +30,59 @@ public class MemberDAO {
 					Constants.USER_ID,
 					Constants.USER_PW);
 		} catch (Exception e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-	public int insert(MemberBean param){
-		String sql = "insert into member(id,pw,name,REG,ssn)"
-				+ "values('"+param.getId()+"','"+param.getPw()+"','"+param.getName()
-				+"','"+param.getRegDate()+"','"+param.getSsn()+"')";
+	public int insert(MemberBean mem){
+		String sql = "insert into member(id,pw,name,reg_date,ssn)"
+				+ "values('"+mem.getId()+"','"+mem.getPw()+"','"+mem.getName()
+				+"','"+mem.getRegDate()+"','"+mem.getSsn()+"')";
 		return exeUpdate(sql);
 	}
-	public MemberBean show() {
-		System.out.println("session 생년월일:"+session.getBirth());
-		return session;
-	}
-	
 	public int update(MemberBean mem){
-		String sql = "update member set pw = '"+mem.getPw()
-			+"'where id = '"+mem.getId()+"'";
-		return exeUpdate(sql);
+		String sql = "update member"
+				+ " set pw = ? , email = ?"
+				+ " where id = ?";
+		int result = 0;
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, mem.getPw());
+			pstmt.setString(2, mem.getEmail());
+			pstmt.setString(3, mem.getId());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if (result==1) {
+			System.out.println("DAO에서 수정 성공");
+		} else {
+			System.out.println("DAO에서 수정 실패");	
+		}
+		return result;
+		
 	}
+
 	public int exeUpdate(String sql) {
 		int result = 0;
 		try {
-			Class.forName(Constants.ORACLE_DRIVER);
-			con = DriverManager.getConnection(
-					Constants.ORACLE_URL,
-					Constants.USER_ID,
-					Constants.USER_PW);
 			stmt = con.createStatement();
 			result = stmt.executeUpdate(sql);
 		} catch (Exception e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		if (result==0) {
 			System.out.println("성공");
 		} else {
 			System.out.println("실패");	
 		}
+		
 		return result;
+		
+		
 	}
 	// list
 	public List<MemberBean> list() {
@@ -81,16 +97,18 @@ public class MemberDAO {
 			stmt = con.createStatement();
 			rs = stmt.executeQuery(sql);
 			while(rs.next()){
-				MemberBean t = new MemberBean(
-						rs.getString("ID"),
-						rs.getString("PW"),
-						rs.getString("NAME"), 
-						rs.getString("SSN")
-						);
-				t.setRegDate(rs.getString("REG"));
+				MemberBean t = new MemberBean();
+					t.setId(rs.getString("ID"));
+					t.setPw(rs.getString("PW"));
+					t.setName(rs.getString("NAME"));
+					t.setEmail(rs.getString("EMAIL"));
+					t.setGenderAndBirth("SSN");
+					t.setRegDate(rs.getString("REG_DATE"));
+					t.setProfileImg(rs.getString("PROFILE_IMG"));
 				list.add(t);
 			}
 		} catch (Exception e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} 
 		return list;
@@ -114,12 +132,14 @@ public class MemberDAO {
 				temp.setName(rs.getString("NAME"));
 				temp.setEmail(rs.getString("EMAIL"));
 				temp.setGenderAndBirth(rs.getString("SSN"));
-				temp.setRegDate(rs.getString("REG"));
+				temp.setRegDate(rs.getString("REG_DATE"));
 				temp.setProfileImg(rs.getString("PROFILE_IMG"));
 			}
 		} catch (Exception e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		System.out.println("DAO 결과(생년월일):"+temp.getBirth());
 		return temp;
 	}
 	// findByNotPK
@@ -145,16 +165,32 @@ public class MemberDAO {
 				count = rs.getInt("count");
 			}
 		} catch (Exception e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return count;
 	}
 
-	public int delete(String id) {
-		String sql = "delete from member where id = '"+id+"'";
-		return exeUpdate(sql);
+	public int delete(MemberBean member) {
+		String sql = "delete from member where id=? and pw = ?";
+		int result = 0;
+		try {
+			pstmt=con.prepareStatement(sql);
+			pstmt.setString(1, member.getId());
+			pstmt.setString(2, member.getPw());
+			result = pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		if (result == 1) {
+			System.out.println("성공");
+		} else {
+			System.out.println("실패");
+		}
+		return result;
 	}
-	
+
 	public boolean login(MemberBean param) {
 		boolean loginOk= false;
 		if(param.getId()!=null 
@@ -179,7 +215,8 @@ public class MemberDAO {
 				result = rs.getInt("count");
 				System.out.println("ID 카운트 결과:"+result);
 			}
-		} catch (Exception e) {
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		if(result == 1){
@@ -188,3 +225,8 @@ public class MemberDAO {
 		return existOK;
 	}
 }
+
+
+
+
+

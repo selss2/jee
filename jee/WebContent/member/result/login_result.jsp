@@ -8,35 +8,35 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>로그인 result</title>
+<title>로그인</title>
 <link rel="stylesheet" href="<%=ctx%>/css/member.css" />
 </head>
 <body>
 <div class="box">
 <%
 	MemberService service = MemberServiceImpl.getInstance();
-	MemberBean mem = new MemberBean();
+	MemberBean member = new MemberBean();
 	
 	String id = request.getParameter("id");
 	String pw = request.getParameter("pw");
 	application.log("넘어온ID"+id);
 	application.log("넘어온PW"+pw);
-	if(id=="" || pw==""){
+	if(id==null || pw==null){
 		%>
 		<h2>로그인 실패!!</h2>
-		<a href=" <%= ctx %>/member/service/login.jsp">다시 시도하기</a>
+		<a href="../service/login.jsp">다시 시도하기</a>
 	
 		<%
 	}else{
-		mem.setId(id);
-		mem.setPw(pw);
-		String name = service.login(mem);
+		member.setId(id);
+		member.setPw(pw);
+		String name = service.login(member);
 		application.log("DB다녀온 이름:"+name);
-		if(name==""){
+		if(name==null){
 			%>
 			<h2>로그인 실패!!</h2>
-			<a href=" <%= ctx %>/member/service/login.jsp">다시 시도하기</a>
-				<%
+			<a href="../service/login.jsp">다시 시도하기</a>
+			<%
 		}else{
 			response.sendRedirect(ctx+"/global/main.jsp");
 		}

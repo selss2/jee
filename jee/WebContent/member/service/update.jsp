@@ -1,41 +1,92 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
- <%@ page import="member.MemberService" %>
-    <%@ page import="member.MemberServiceImpl" %>
+<%@ page import="member.MemberServiceImpl" %>
+    <%@ page import="member.MemberService" %>
     <%@ page import="member.MemberBean" %>
-    <%String ctx = application.getContextPath(); %>
-    
+    <% String ctx = application.getContextPath(); %>
 <!doctype html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8" />
-<title>비번 수정</title>
-<link rel="stylesheet" href=" <%= ctx %>/css/member.css" />
+<meta charset="UTF-8">
+<title>상세보기</title>
+<link rel="stylesheet" href="<%=ctx %>/css/member.css" />
+<style>
+#member_detail{border: 1px solid gray;width:100%;height:400px;margin:0 auto; border-collapse: collapse;}
+#member_detail tr{border: 1px solid gray;hetigh:20%}
+#member_detail tr td{border: 1px solid gray;}
+.font_bold{font-weght:bold;}
+.bg_color_yellow{background-color: yellow}
+</style>
 </head>
 <body>
-	<div class = "box">
-	<%
-	MemberService service = MemberServiceImpl.getInstance();
-	MemberBean mem = new MemberBean();
-	service.getSession().getId();
-	
-	if(service.getSession().getId()==null){
-		%><h1>로그인이 되어있지 않습니다!!</h1><br/>
-		<a href="<%= ctx%>/member/service/login.jsp">로그인하러 이동!!</a>
+<!-- //id, name, ssn, birth, regDate, gender, proImg -->
+<div class="box">
+		<h1>회원정보 수정</h1>
 		<%
-	}else{
-%>
-	<form action = " <%= ctx %>/member/result/update_result.jsp" method="post">
-			<span class="meta"> 변경할 PW : </span> <input type="text" name="pw"/><br/>
-		<br/><br/>
-			<input type = "submit" value="확인">
-			<input type = "reset" value="취소">
+		MemberService service = MemberServiceImpl.getInstance();
+		MemberBean member = new MemberBean();
+		
+		%>		
+		<form action="<%=ctx%>/member/result/update_result.jsp" method="post">
+		
+		<table id="member_detail">
+				<tr>
+				<td rowspan="5" style="width:30%">
+				<img src="<%=ctx %>/img/member/<%=service.show().getProfileImg()%>" alt="W3Schools.com" width="104"
+			height="142"></td>
+				<td style="width:20%" class="font_bold bg_color_yellow">ID</td>
+				<td style="width:40%"><%= service.show().getId() %></td>
+			</tr>
+			<tr>
+				<td class="font_bold bg_color_yellow">비밀번호</td>
+				<td>
+				<input type="text" name="pw" 
+					value="<%= service.show().getPw() %>"/>
+				</td>
+			</tr>
+			<tr>
+				<td class="font_bold bg_color_yellow">이 름</td>
+				<td><%= service.show().getName() %></td>
+			</tr>
+			
+			<tr>
+				
+				<td class="font_bold bg_color_yellow">성 별</td>
+				<td><%= service.show().getGender() %></td>
+			</tr>
+			<tr>
+				
+				<td class="font_bold bg_color_yellow">이메일</td>
+				<td>
+					<input type="text" name="email" 
+					value="<%= service.show().getEmail() %>"/>
+				</td>
+			</tr>
+			<tr>
+				<td class="font_bold bg_color_yellow">생년월일</td>
+				<td colspan="2"><%= service.show().getBirth() %></td>
+			</tr>
+			<tr>
+				<td class="font_bold bg_color_yellow">등록일</td>
+				<td colspan="2"><%= service.show().getRegDate() %></td>
+				
+			</tr>
+		</table>
+		<input type="hidden" name="id" value="<%= service.show().getId() %>"/>
+		<input type="submit" value="수 정" />
+		<input type="reset" value="취 소" />
 		</form>
-		<a href=" <%= ctx %>/member/member_controller.jsp"><img src=" <%= ctx %>/img/ThumbnailAction.jpg" alt="" width="10%" height="10%"></a>
-		<a href=" <%= ctx %>/index.jsp"><img src=" <%= ctx %>/img/home.png" alt="" width="10%" height="10%"></a>
-	<%
-	}
-	%>
+		
+		<br /> 
+		<p>
+			
+		</p>
+		<a href="<%=ctx %>/member/member_controller.jsp">
+<img src="<%=ctx %>/img/member.jpg" alt="member" style="width:30px" /></a>
+<a href="<%=ctx %>/index.jsp">
+		<img src="<%=ctx %>/img/home.png" alt="member" style="width:30px" />
+		</a>
+
 	</div>
 </body>
 </html>

@@ -1,26 +1,32 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
- <%@ page import="member.MemberService" %>
     <%@ page import="member.MemberServiceImpl" %>
+    <%@ page import="member.MemberService" %>
     <%@ page import="member.MemberBean" %>
-    <%String ctx = application.getContextPath(); %>
+<% String ctx = application.getContextPath(); %>
 <!doctype html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8" />
-<title>탈퇴</title>
-<link rel="stylesheet" href=" <%= ctx %>/css/member.css" />
-	
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="<%=ctx %>/css/member.css" />
 </head>
 <body>
-<div class = "box">
-	탈퇴결과창 <br>
-<%
+
+<div class="box">
+<embed src="<%=ctx %>/img/star.gif">
+<h1>탈퇴 페이지</h1>
+<% 
 	MemberService service = MemberServiceImpl.getInstance();
-	MemberBean mem = new MemberBean();
-		service.delete(mem);
-%><h2>탈퇴되었습니다!!!</h2>
-<a href=" <%= ctx %>/member/service/login.jsp">로그인하러 가기</a>
-	</div>
+	MemberBean member = new MemberBean();
+	String id = request.getParameter("id");
+	String pw = request.getParameter("confirm");
+	member.setId(id);
+	member.setPw(pw);
+	service.delete(member);
+	response.sendRedirect(ctx+"/index.jsp");
+%>
+
+</div>
 </body>
 </html>

@@ -1,32 +1,45 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
- <%@ page import="member.MemberService" %>
-    <%@ page import="member.MemberServiceImpl" %>
+<%@ page import="member.MemberServiceImpl" %>
+    <%@ page import="member.MemberService" %>
     <%@ page import="member.MemberBean" %>
-    <%String ctx = application.getContextPath(); %>
+<% String ctx = application.getContextPath(); %>
 <!doctype html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8" />
-<title>수정</title>
-<link rel="stylesheet" href=" <%= ctx %>/css/member.css" />
-	
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="../../css/member.css" />
 </head>
 <body>
-<div class = "box">
-	수정 결과 <br>
-<%
+<div class="box">
+
+<h1>정보수정 페이지 </h1>
+
+
+	<%
 	MemberService service = MemberServiceImpl.getInstance();
-	MemberBean mem = new MemberBean();
-	
-	
+	MemberBean member = service.findById(request.getParameter("id"));
 	String pw = request.getParameter("pw");
-	application.log("변경할 비번 출력해보기 : "+pw);
-		mem.setId(service.getSession().getId());
-		mem.setPw(pw);
-		service.update(mem);
-%><h2>비밀번호 변경완료!!!</h2>
-<a href=" <%= ctx %>/member/service/login.jsp">변경된 비밀번호로 로그인하러 가기</a>
-	</div>
+	String email = request.getParameter("email");
+		
+			member.setPw(pw);
+			member.setEmail(email);
+			
+			service.update(member);
+			response.sendRedirect(ctx+"/member/service/detail.jsp");
+			
+		%>
+
+
+
+<a href="<%=ctx %>/memberController.jsp">
+<img src="<%=ctx %>/img/member.png" alt="member" style="width:30px" /></a>
+<a href="<%=ctx %>/index.jsp">
+		<img src="<%=ctx %>/img/home.png" alt="member" style="width:30px" />
+		</a>
+
+
+</div>
 </body>
 </html>

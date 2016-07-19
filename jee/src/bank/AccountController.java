@@ -40,8 +40,7 @@ public class AccountController {
 				String[]inputArr2 = input2.split(",");
 				stu2.setId(inputArr2[0]);
 				stu2.setPw(inputArr2[1]);
-				String result2 = mService.update(stu2);
-				JOptionPane.showMessageDialog(null, result2);
+				mService.update(stu2);
 				break;
 			case "5":break;
 			case "6":

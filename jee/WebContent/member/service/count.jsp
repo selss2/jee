@@ -1,21 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-        <%
-    String ctx = application.getContextPath();
-    %>
-    
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html>
 <head>
-	<meta charset="UTF-8" />
-	<title>회원수</title>
-<link rel="stylesheet" href=" <%= ctx %>/css/member.css" />
+<meta charset="UTF-8">
+<title>회원가입</title>
+<link rel="stylesheet" href="../../css/member.css" />
 </head>
 <body>
-<div class = "box">
-	회원수 <br>
-<a href=" <%= ctx %>/member/member_controller.jsp"><img src=" <%= ctx %>/img/ThumbnailAction.jpg" alt="" width="10%" height="10%"></a>
-	 <a href=" <%= ctx %>/index.jsp"><img src=" <%= ctx %>/img/home.png" alt="" width="10%" height="10%"></a>
+<div class="box">
+	<h1>회원수</h1> 
+	<a href="../../index.jsp">
+		<img src="../../img/home.png" alt="home" style="width: 30px"/>
+	</a>
+	<a href="../member_controller.jsp">
+		<img src="../../img/member.jpg" alt="member" style="width: 30px"/>
+	</a>
 </div>
+	
 </body>
 </html>

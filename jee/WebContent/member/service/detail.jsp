@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="member.MemberServiceImpl" %>
-    <%@ page import="member.MemberService" %>
-    <%@ page import="member.MemberBean" %>
-    <% String ctx = application.getContextPath(); %>
+<%@ page import="member.MemberService" %>
+<%@ page import="member.MemberBean" %>
+<% String ctx = application.getContextPath(); %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -24,8 +24,7 @@
 		<h1>회원상세정보</h1>
 		<%
 		MemberService service = MemberServiceImpl.getInstance();
-		MemberBean mem = new MemberBean();
-		
+		MemberBean member = new MemberBean();
 		
 		if(service.show().getId() == ""){
 			%>
@@ -39,7 +38,7 @@
 		<table id="member_detail">
 				<tr>
 				<td rowspan="4" style="width:30%">
-				<img src="<%=ctx %>/img/member/<%=service.show().getProfileImg()%>" alt="" width="104"
+				<img src="<%=ctx %>/img/member/<%=service.show().getProfileImg()%>" alt="W3Schools.com" width="104"
 			height="142"></td>
 				<td style="width:20%" class="font_bold bg_color_yellow">ID</td>
 				<td style="width:40%"><%= service.show().getId() %></td>
@@ -79,7 +78,7 @@
 			
 		</p>
 		<a href="<%=ctx %>/member/member_controller.jsp">
-<img src="<%=ctx %>/img/ThumbnailAction.jpg" alt="member" style="width:30px" /></a>
+<img src="<%=ctx %>/img/member.jpg" alt="member" style="width:30px" /></a>
 <a href="<%=ctx %>/index.jsp">
 		<img src="<%=ctx %>/img/home.png" alt="member" style="width:30px" />
 		</a>

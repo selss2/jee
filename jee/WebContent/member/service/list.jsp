@@ -1,15 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-        <%
-    String ctx = application.getContextPath();
-    %>
-    
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html>
 <head>
-	<meta charset="UTF-8" />
+<meta charset="UTF-8">
 <title>회원목록</title>
-<link rel="stylesheet" href=" <%= ctx %>/css/member.css" />
+<link rel="stylesheet" href="../../css/member.css" />
 <style>
 table {
     font-family: arial, sans-serif;
@@ -27,7 +23,8 @@ tr:nth-child(even) {
 </style>
 </head>
 <body>
-<div class = "box">
+<div class="box">
+
 	<h1>목록보기</h1> <br> 
 	<table>
 	  <tr>
@@ -67,8 +64,12 @@ tr:nth-child(even) {
 	    <td>851001</td>
 	  </tr>
 	</table>
-	<a href=" <%= ctx %>/member/member_controller.jsp"><img src=" <%= ctx %>/img/ThumbnailAction.jpg" alt="" width="10%" height="10%"></a>
-	 <a href=" <%= ctx %>/index.jsp"><img src=" <%= ctx %>/img/home.png" alt="" width="10%" height="10%"></a>
+	<a href="../../index.jsp">
+		<img src="../../img/home.png" alt="home" style="width: 30px"/>
+	</a>
+	<a href="../member_controller.jsp">
+		<img src="../../img/member.jpg" alt="member" style="width: 30px"/>
+	</a>
 </div>
 </body>
 </html>

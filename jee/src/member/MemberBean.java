@@ -3,14 +3,18 @@ package member;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 
+/**
+ * @date   :2016. 6. 16. 
+ * @author :pakjkwan@gmail.com
+ * @file   :Student.java
+ * @story  :
+*/
 public class MemberBean {
-	private String id,pw,name,regDate,gender,ssn, profileImg,email; 
+	private String id,pw,name,regDate,gender,ssn,profileImg,email; 
 	private int birth;
-	// id, birth,name,regDate,gender 
 	
 	public MemberBean() {}
 	
-
 	public MemberBean(String id,String pw,String name,String ssn) {
 		this.id = id;
 		this.pw = pw;
@@ -18,17 +22,18 @@ public class MemberBean {
 		this.ssn = ssn;
 		String now = new SimpleDateFormat("yyyy-MM-dd").format(new Date(System.currentTimeMillis()));
 		this.regDate = now;
-
 		String[] ssnArr = ssn.split("-");
 		String[] nowArr = now.split("-");
 		int ageResult1 = (Integer.parseInt(ssnArr[0]));
 		int genderResult = (Integer.parseInt(ssnArr[1]));
 		int ageResult2 = (Integer.parseInt(nowArr[0]));
 		int ageResult0 = 0;
+		System.out.println("버스+++++"+genderResult);
 		switch (genderResult%2) {
 		case 1: case 5: 
 			this.gender="남"; 
 			ageResult0 = ageResult2 - 1900-(ageResult1/10000);
+			System.out.println("버스+++++"+ageResult0);
 			this.birth = ageResult0;
 			break;
 		case 3: case 7:
@@ -50,6 +55,7 @@ public class MemberBean {
 			System.out.println("잘못된값이 입력됨");
 		}
 	}
+	
 	public String getEmail() {
 		return email;
 	}
@@ -140,7 +146,7 @@ public class MemberBean {
 	public int getBirth() {
 		return birth;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "학생 [아이디=" + id + ", 비번=****"+ ", 이메일=" + email  + ", 이름=" + name + ", 등록일=" + regDate + ", 성별=" + gender
